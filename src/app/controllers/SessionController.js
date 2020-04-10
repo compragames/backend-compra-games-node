@@ -50,6 +50,7 @@ class SessionController {
     }
 
     const { id, name, provider, active, paperUser } = user;
+
     return res.json({
       user: {
         id,
@@ -58,9 +59,9 @@ class SessionController {
         provider,
         active,
         paperUser: {
-          id: paperUser.id,
-          paper: paperUser.paper_id,
-          title: paperUser.paper.title,
+          id: paperUser ? paperUser.id : null,
+          paper: paperUser ? paperUser.paper_id : null,
+          title: paperUser ? paperUser.paper.title : null,
         },
       },
       token: jwt.sign({ id }, auth.secret, {
