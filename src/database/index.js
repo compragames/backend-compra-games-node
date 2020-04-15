@@ -10,6 +10,8 @@ import Acquisition from '../app/models/Acquisition';
 import Stock from '../app/models/Stock';
 import Paper from '../app/models/Paper';
 import PaperUser from '../app/models/PaperUser';
+import Client from '../app/models/Client';
+import Address from '../app/models/Address';
 
 const models = [
   User,
@@ -20,6 +22,8 @@ const models = [
   Stock,
   Paper,
   PaperUser,
+  Client,
+  Address,
 ];
 
 class Database {

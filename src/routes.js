@@ -13,6 +13,8 @@ import AvailableProductController from './app/controllers/AvailableProductContro
 import PaperController from './app/controllers/PaperControlller';
 import UserProviderController from './app/controllers/UserProviderController';
 import PaperUserController from './app/controllers/PaperUserController';
+import ClientController from './app/controllers/ClientController';
+import AddressController from './app/controllers/AddressController';
 
 import authMiddleware from './app/middleware/auth';
 
@@ -26,6 +28,9 @@ routes.post('/sessions', SessionController.store);
 routes.post('/users', UserController.store);
 routes.get('/products', ProductController.index);
 routes.get('/products/:id', ProductController.show);
+
+routes.post('/clients', ClientController.store);
+routes.post('/addresses', AddressController.store);
 
 routes.use(authMiddleware);
 

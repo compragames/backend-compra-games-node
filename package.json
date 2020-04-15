@@ -5,13 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "build":"sucrase src -d build --transforms imports",
+    "build": "sucrase src -d build --transforms imports",
     "start": "node build/server.js",
     "dev:debug": "nodemon --inspect src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cpf-cnpj-validator": "^1.0.1",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",

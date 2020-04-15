@@ -4,7 +4,6 @@ import User from '../models/User';
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
       email: Yup.string()
         .email()
         .required(),
@@ -20,12 +19,12 @@ class UserController {
     if (userExist) {
       return res.status(400).json({ error: 'User already exists' });
     }
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
-    const { id, provider } = await User.create({ name, email, password });
+    const { id, provider } = await User.create({ email, password });
     return res.json({
       id,
-      name,
+
       email,
       provider,
     });
@@ -33,7 +32,6 @@ class UserController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
@@ -63,11 +61,10 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    const { id, provider } = await user.update(req.body);
 
     return res.json({
       id,
-      name,
       email,
       provider,
     });
