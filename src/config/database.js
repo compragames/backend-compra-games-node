@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 module.exports = {
   dialect: 'postgres',
   host: 'tuffi.db.elephantsql.com',
@@ -11,8 +10,6 @@ module.exports = {
     underscoredAll: true,
   },
 };
-=======
->>>>>>> 1e9cf832445c749c29bebcfd7bd71035fd5b1d79
 // module.exports = {
 //   dialect: 'postgres',
 //   host: 'localhost',

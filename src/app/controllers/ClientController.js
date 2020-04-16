@@ -44,7 +44,7 @@ class ClientController {
 
   async update(req, res) {
     const schema = Yup.object().shape({ 
-      name: Yup.string().min(3).required()
+      name: Yup.string().min(3).required().matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/)
      })
 
      if (!(await schema.isValid(req.body))) {
