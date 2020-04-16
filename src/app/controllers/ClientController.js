@@ -2,18 +2,22 @@ import * as Yup from 'yup';
 import Client from '../models/Client';
 
 class ClientController {
+  
   async store(req, res) {
+
     const schema = Yup.object().shape({
       name: Yup.string()
-        .min(3)
-        .required(),
+      .min(3)
+      .required()
+      .matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/),
       cpf: Yup.string()
         .length(11)
         .required(),
     });
 
+
     if (!(await schema.isValid(req.body))) {
-      res.json({ error: 'validations fails' });
+      return res.status(400).json({ error: 'validations fails' });
     }
 
     const { name, cpf } = req.body;
@@ -21,11 +25,11 @@ class ClientController {
     const clientExists = await Client.findOne({ where: { cpf } });
 
     if (!(await Client.checkCpfCnpj(cpf))) {
-      res.json({ error: 'CPF invalid' });
+      return res.status(400).json({ error: 'CPF invalid' });
     }
 
     if (clientExists) {
-      res.json({ error: 'Client already exists' });
+      return res.status(400).json({ error: 'Client already exists' });
     }
 
     const { id } = await Client.create({ name, cpf });
@@ -35,6 +39,7 @@ class ClientController {
       name,
       cpf,
     });
+
   }
 }
 
