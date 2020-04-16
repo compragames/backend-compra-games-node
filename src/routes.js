@@ -30,7 +30,9 @@ routes.get('/products', ProductController.index);
 routes.get('/products/:id', ProductController.show);
 
 routes.post('/clients', ClientController.store);
+routes.put('/clients/:id', ClientController.update);
 routes.post('/addresses', AddressController.store);
+routes.put('/addresses/:id', AddressController.update);
 
 routes.use(authMiddleware);
 

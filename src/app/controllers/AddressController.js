@@ -21,6 +21,31 @@ class AddressController {
     const address = await Address.create(req.body);
     res.json(address);
   }
+
+  async update(req, res) {
+        const schema = Yup.object().shape({
+          street: Yup.string(),
+          number: Yup.string(),
+          neighborhood: Yup.string(),
+          cep: Yup.string(),
+          complement: Yup.string(),
+          state: Yup.string()
+            .length(2),
+          city: Yup.string(),
+        })
+
+        if (!(await schema.isValid(req.body))) {
+          return res.status(400).json({ error: 'Validation Fails' })
+        }
+
+        const { id } = req.params;
+        const address = await Address.findByPk(id);
+        if (!address) {
+          return res.status(400).json( {error: 'address not found'});
+        }        
+        const newAddress = await address.update(req.body);
+        return res.json(newAddress);
+  }
 }
 
 export default new AddressController();
