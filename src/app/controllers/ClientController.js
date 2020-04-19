@@ -2,19 +2,16 @@ import * as Yup from 'yup';
 import Client from '../models/Client';
 
 class ClientController {
-  
   async store(req, res) {
-
     const schema = Yup.object().shape({
       name: Yup.string()
-      .min(3)
-      .required()
-      .matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/),
+        .min(3)
+        .required()
+        .matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/),
       cpf: Yup.string()
         .length(11)
         .required(),
     });
-
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'validations fails' });
@@ -34,27 +31,29 @@ class ClientController {
 
     const { id } = await Client.create({ name, cpf });
 
-    res.json({
+    return res.json({
       id,
       name,
       cpf,
     });
-
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({ 
-      name: Yup.string().min(3).required().matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/)
-     })
+    const schema = Yup.object().shape({
+      name: Yup.string()
+        .min(3)
+        .required()
+        .matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/),
+    });
 
-     if (!(await schema.isValid(req.body))) {
-        return res.status(400).json({ error: 'Validation Fails' })
-     }
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation Fails' });
+    }
 
     const { id } = req.params;
-    const client =  await Client.findByPk(id);
+    const client = await Client.findByPk(id);
     const { name, cpf } = await client.update(req.body);
-    return res.json({ id, name, cpf });        
+    return res.json({ id, name, cpf });
   }
 }
 
