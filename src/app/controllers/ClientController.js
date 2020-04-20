@@ -55,6 +55,13 @@ class ClientController {
     const { name, cpf } = await client.update(req.body);
     return res.json({ id, name, cpf });
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+    const client = await Client.findByPk(id);
+
+    res.json(client);
+  }
 }
 
 export default new ClientController();

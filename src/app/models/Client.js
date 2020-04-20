@@ -18,5 +18,9 @@ class Client extends Model {
   static checkCpfCnpj(cpf) {
     return cpfValidator.isValid(cpf);
   }
+
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'client' });
+  }
 }
 export default Client;
