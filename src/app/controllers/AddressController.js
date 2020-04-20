@@ -8,7 +8,7 @@ class AddressController {
       number: Yup.string().required(),
       neighborhood: Yup.string().required(),
       cep: Yup.string().required(),
-      complement: Yup.string().required(),
+      complement: Yup.string(),
       state: Yup.string()
         .length(2)
         .required(),
@@ -16,7 +16,7 @@ class AddressController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      res.json({ error: 'validations fails' });
+      return res.status(400).json({ error: 'validations fails' });
     }
     const address = await Address.create(req.body);
     return res.json(address);

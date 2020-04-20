@@ -16,16 +16,24 @@ import PaperUserController from './app/controllers/PaperUserController';
 import ClientController from './app/controllers/ClientController';
 import AddressController from './app/controllers/AddressController';
 
+// Middlewares
 import authMiddleware from './app/middleware/auth';
-
 import updateStockMiddleware from './app/middleware/updateStock';
+import cpfValidationMiddleware from './app/middleware/cpfValidation';
+import userUnavailableMiddleware from './app/middleware/userUnavailable';
+
 import multerConfig from './config/multer';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
-routes.post('/users', UserController.store);
+routes.post(
+  '/users',
+  userUnavailableMiddleware,
+  cpfValidationMiddleware,
+  UserController.store
+);
 routes.get('/products', ProductController.index);
 routes.get('/products/:id', ProductController.show);
 
