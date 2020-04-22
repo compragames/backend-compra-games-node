@@ -18,7 +18,9 @@ class AddressController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'validations fails' });
     }
-    const address = await Address.create(req.body);
+    const address = [];
+    address.push(await Address.create({ ...req.body, delivery: true }));
+    address.push(await Address.create({ ...req.body, delivery: false }));
     return res.json(address);
   }
 
@@ -44,6 +46,14 @@ class AddressController {
     }
     const newAddress = await address.update(req.body);
     return res.json(newAddress);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const addressess = await Address.findAll({ where: { client_id: id } });
+
+    return res.json(addressess);
   }
 }
 

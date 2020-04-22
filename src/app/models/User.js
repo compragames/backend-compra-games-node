@@ -25,6 +25,7 @@ class User extends Model {
 
   static associate(models) {
     this.hasOne(models.PaperUser, { foreignKey: 'user_id', as: 'paperUser' });
+    this.hasOne(models.Client, { foreignKey: 'user_id', as: 'client' });
   }
 
   checkPassword(password) {

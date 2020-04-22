@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 import User from '../models/User';
+import Client from '../models/Client';
+import Address from '../models/Address';
 
 class UserController {
   async store(req, res) {
@@ -47,7 +49,7 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-    const { email, oldPassword } = req.body;
+    const { email, oldPassword, password } = req.body;
     const user = await User.findByPk(req.userId);
     if (email && email !== user.email) {
       const userExist = await User.findOne({ where: { email } });
@@ -61,13 +63,47 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, provider } = await user.update(req.body);
+    const { id, provider } = await user.update({ password });
 
     return res.json({
       id,
       email,
       provider,
     });
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id, {
+      attributes: ['id', 'email', 'active'],
+      include: [
+        {
+          attributes: ['id', 'name', 'cpf'],
+          model: Client,
+          as: 'client',
+          include: [
+            {
+              attributes: [
+                'id',
+                'street',
+                'number',
+                'neighborhood',
+                'cep',
+                'complement',
+                'state',
+                'city',
+                'delivery',
+              ],
+              model: Address,
+              as: 'address',
+            },
+          ],
+        },
+      ],
+    });
+
+    res.json(user);
   }
 }
 

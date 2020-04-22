@@ -4,6 +4,7 @@ import User from '../models/User';
 import auth from '../../config/auth';
 import PaperUser from '../models/PaperUser';
 import Paper from '../models/Paper';
+import Client from '../models/Client';
 
 class SessionController {
   async store(req, res) {
@@ -22,6 +23,11 @@ class SessionController {
     const user = await User.findOne({
       where: { email },
       include: [
+        {
+          attributes: ['id', 'name', 'cpf'],
+          model: Client,
+          as: 'client',
+        },
         {
           model: PaperUser,
           as: 'paperUser',
@@ -49,7 +55,7 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, provider, active, paperUser } = user;
+    const { id, provider, active, paperUser, client } = user;
 
     return res.json({
       user: {
@@ -57,6 +63,7 @@ class SessionController {
         email,
         provider,
         active,
+        client,
         paperUser: {
           id: paperUser ? paperUser.id : null,
           paper: paperUser ? paperUser.paper_id : null,

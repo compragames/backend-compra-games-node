@@ -20,7 +20,7 @@ class Client extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'client' });
+    this.hasMany(models.Address, { foreignKey: 'client_id', as: 'address' });
   }
 }
 export default Client;

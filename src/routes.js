@@ -43,6 +43,10 @@ routes.get('/clients/:id', ClientController.show);
 routes.post('/addresses', AddressController.store);
 routes.put('/addresses/:id', AddressController.update);
 
+routes.get('/addresses/client/:id', AddressController.show);
+
+routes.get('/users/:id', UserController.show);
+
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);

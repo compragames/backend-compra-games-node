@@ -17,7 +17,7 @@ class ClientController {
       return res.status(400).json({ error: 'validations fails' });
     }
 
-    const { name, cpf } = req.body;
+    const { name, cpf, user_id } = req.body;
 
     const clientExists = await Client.findOne({ where: { cpf } });
 
@@ -29,7 +29,7 @@ class ClientController {
       return res.status(400).json({ error: 'Client already exists' });
     }
 
-    const { id } = await Client.create({ name, cpf });
+    const { id } = await Client.create({ name, cpf, user_id });
 
     return res.json({
       id,
@@ -51,8 +51,9 @@ class ClientController {
     }
 
     const { id } = req.params;
+    const { name } = req.body;
     const client = await Client.findByPk(id);
-    const { name, cpf } = await client.update(req.body);
+    const { cpf } = await client.update({ name });
     return res.json({ id, name, cpf });
   }
 
