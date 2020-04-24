@@ -4,6 +4,7 @@ var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User
 var _auth = require('../../config/auth'); var _auth2 = _interopRequireDefault(_auth);
 var _PaperUser = require('../models/PaperUser'); var _PaperUser2 = _interopRequireDefault(_PaperUser);
 var _Paper = require('../models/Paper'); var _Paper2 = _interopRequireDefault(_Paper);
+var _Client = require('../models/Client'); var _Client2 = _interopRequireDefault(_Client);
 
 class SessionController {
   async store(req, res) {
@@ -22,6 +23,11 @@ class SessionController {
     const user = await _User2.default.findOne({
       where: { email },
       include: [
+        {
+          attributes: ['id', 'name', 'cpf'],
+          model: _Client2.default,
+          as: 'client',
+        },
         {
           model: _PaperUser2.default,
           as: 'paperUser',
@@ -49,18 +55,19 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, provider, active, paperUser } = user;
+    const { id, provider, active, paperUser, client } = user;
+
     return res.json({
       user: {
         id,
-        name,
         email,
         provider,
         active,
+        client,
         paperUser: {
-          id: paperUser.id,
-          paper: paperUser.paper_id,
-          title: paperUser.paper.title,
+          id: paperUser ? paperUser.id : null,
+          paper: paperUser ? paperUser.paper_id : null,
+          title: paperUser ? paperUser.paper.title : null,
         },
       },
       token: _jsonwebtoken2.default.sign({ id }, _auth2.default.secret, {

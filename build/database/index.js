@@ -10,6 +10,8 @@ var _Acquisition = require('../app/models/Acquisition'); var _Acquisition2 = _in
 var _Stock = require('../app/models/Stock'); var _Stock2 = _interopRequireDefault(_Stock);
 var _Paper = require('../app/models/Paper'); var _Paper2 = _interopRequireDefault(_Paper);
 var _PaperUser = require('../app/models/PaperUser'); var _PaperUser2 = _interopRequireDefault(_PaperUser);
+var _Client = require('../app/models/Client'); var _Client2 = _interopRequireDefault(_Client);
+var _Address = require('../app/models/Address'); var _Address2 = _interopRequireDefault(_Address);
 
 const models = [
   _User2.default,
@@ -20,6 +22,8 @@ const models = [
   _Stock2.default,
   _Paper2.default,
   _PaperUser2.default,
+  _Client2.default,
+  _Address2.default,
 ];
 
 class Database {

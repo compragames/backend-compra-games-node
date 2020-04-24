@@ -6,7 +6,7 @@ class PaperController {
     const paper = await _Paper2.default.create({
       title,
     });
-    res.json(paper);
+    return res.json(paper);
   }
 
   async update(req, res) {
@@ -21,13 +21,13 @@ class PaperController {
     paper.update({
       title,
     });
-    res.json(paper);
+    return res.json(paper);
   }
 
   async index(req, res) {
     const paper = await _Paper2.default.findAll();
 
-    res.json(paper);
+    return res.json(paper);
   }
 }
 

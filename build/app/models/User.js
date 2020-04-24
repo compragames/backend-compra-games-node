@@ -5,7 +5,6 @@ class User extends _sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        name: _sequelize2.default.STRING,
         email: _sequelize2.default.STRING,
         password: _sequelize2.default.VIRTUAL,
         password_hash: _sequelize2.default.STRING,
@@ -26,6 +25,7 @@ class User extends _sequelize.Model {
 
   static associate(models) {
     this.hasOne(models.PaperUser, { foreignKey: 'user_id', as: 'paperUser' });
+    this.hasOne(models.Client, { foreignKey: 'user_id', as: 'client' });
   }
 
   checkPassword(password) {

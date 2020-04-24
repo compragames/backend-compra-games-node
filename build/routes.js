@@ -13,19 +13,39 @@ var _AvailableProductController = require('./app/controllers/AvailableProductCon
 var _PaperControlller = require('./app/controllers/PaperControlller'); var _PaperControlller2 = _interopRequireDefault(_PaperControlller);
 var _UserProviderController = require('./app/controllers/UserProviderController'); var _UserProviderController2 = _interopRequireDefault(_UserProviderController);
 var _PaperUserController = require('./app/controllers/PaperUserController'); var _PaperUserController2 = _interopRequireDefault(_PaperUserController);
+var _ClientController = require('./app/controllers/ClientController'); var _ClientController2 = _interopRequireDefault(_ClientController);
+var _AddressController = require('./app/controllers/AddressController'); var _AddressController2 = _interopRequireDefault(_AddressController);
 
+// Middlewares
 var _auth = require('./app/middleware/auth'); var _auth2 = _interopRequireDefault(_auth);
-
 var _updateStock = require('./app/middleware/updateStock'); var _updateStock2 = _interopRequireDefault(_updateStock);
+var _cpfValidation = require('./app/middleware/cpfValidation'); var _cpfValidation2 = _interopRequireDefault(_cpfValidation);
+var _userUnavailable = require('./app/middleware/userUnavailable'); var _userUnavailable2 = _interopRequireDefault(_userUnavailable);
+
 var _multer3 = require('./config/multer'); var _multer4 = _interopRequireDefault(_multer3);
 
 const routes = new (0, _express.Router)();
 const upload = _multer2.default.call(void 0, _multer4.default);
 
 routes.post('/sessions', _SessionController2.default.store);
-routes.post('/users', _UserController2.default.store);
+routes.post(
+  '/users',
+  _userUnavailable2.default,
+  _cpfValidation2.default,
+  _UserController2.default.store
+);
 routes.get('/products', _ProductController2.default.index);
 routes.get('/products/:id', _ProductController2.default.show);
+
+routes.post('/clients', _ClientController2.default.store);
+routes.put('/clients/:id', _ClientController2.default.update);
+routes.get('/clients/:id', _ClientController2.default.show);
+routes.post('/addresses', _AddressController2.default.store);
+routes.put('/addresses/:id', _AddressController2.default.update);
+
+routes.get('/addresses/client/:id', _AddressController2.default.show);
+
+routes.get('/users/:id', _UserController2.default.show);
 
 routes.use(_auth2.default);
 
