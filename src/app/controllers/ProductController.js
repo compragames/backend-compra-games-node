@@ -81,7 +81,7 @@ class ProductController {
         {
           model: Image,
           as: 'images',
-          attributes: ['id', 'path', 'url', 'name'],
+          attributes: ['id', 'name', 'path', 'main', 'url'],
         },
         {
           model: Faq,

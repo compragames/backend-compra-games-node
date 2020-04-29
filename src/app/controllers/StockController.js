@@ -37,6 +37,15 @@ class StockController {
     });
     return res.json(stock);
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+    const product = await Stock.findOne({
+      where: { product_id: id },
+      attributes: ['id', 'amount', 'product_id'],
+    });
+    return res.json(product);
+  }
 }
 
 export default new StockController();

@@ -15,6 +15,7 @@ import UserProviderController from './app/controllers/UserProviderController';
 import PaperUserController from './app/controllers/PaperUserController';
 import ClientController from './app/controllers/ClientController';
 import AddressController from './app/controllers/AddressController';
+import StockController from './app/controllers/StockController';
 
 // Middlewares
 import authMiddleware from './app/middleware/auth';
@@ -46,6 +47,7 @@ routes.put('/addresses/:id', AddressController.update);
 routes.get('/addresses/client/:id', AddressController.show);
 
 routes.get('/users/:id', UserController.show);
+routes.get('/stock/:id', StockController.show);
 
 routes.use(authMiddleware);
 
