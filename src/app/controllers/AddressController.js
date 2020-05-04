@@ -18,6 +18,10 @@ class AddressController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'validations fails' });
     }
+    if (req.body.add) {
+      const address = await Address.create({ ...req.body, delivery: true });
+      return res.json(address);
+    }
     const address = [];
     address.push(await Address.create({ ...req.body, delivery: true }));
     address.push(await Address.create({ ...req.body, delivery: false }));
