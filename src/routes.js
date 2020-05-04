@@ -90,4 +90,7 @@ routes.post('/users/provider', UserProviderController.store);
 routes.put('/user/provider/:id', UserProviderController.update);
 routes.delete('/user/provider/:id', UserProviderController.delete);
 
+
+routes.post('/payments', PaymentController.store);
+
 export default routes;
