@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import Payment from '../models/Payment';
+import Card from '../models/Card';
 
-class PaymentController {
+class CardController {
   async store(req, res) {
 
     const { 
@@ -25,4 +25,4 @@ class PaymentController {
   }
 }
 
-export default new PaymentController();
+export default new CardController();

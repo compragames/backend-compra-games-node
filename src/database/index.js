@@ -12,6 +12,11 @@ import Paper from '../app/models/Paper';
 import PaperUser from '../app/models/PaperUser';
 import Client from '../app/models/Client';
 import Address from '../app/models/Address';
+import Card from '../app/models/Card';
+import Sale from '../app/models/Sale';
+import CardSale from '../app/models/CardSale';
+import Payment from '../app/models/Payment';
+import SaleDetail from '../app/models/SaleDetail';
 
 const models = [
   User,
@@ -24,6 +29,11 @@ const models = [
   PaperUser,
   Client,
   Address,
+  CardSale,
+  Card,
+  Sale,
+  Payment,
+  SaleDetail,
 ];
 
 class Database {

@@ -6,8 +6,7 @@ class SaleDetail extends Model {
       {
         amount: Sequelize.INTEGER,
         unitPrice: Sequelize.DECIMAL,
-        fare: Sequelize.DECIMAL,
-        totalPriceItem: Sequelize.DECIMAL,               
+        fare: Sequelize.DECIMAL,             
       },
       {
         sequelize,

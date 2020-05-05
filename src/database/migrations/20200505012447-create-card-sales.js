@@ -1,23 +1,25 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('payments', {
+    return queryInterface.createTable('card_sales', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      cardOwner: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      cardNumber: {
+      sale_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'sales', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
       },
-      dueDate: {
-        type: Sequelize.DATE,
+      card_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'cards', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       created_at: {
         type: Sequelize.DATE,
@@ -31,6 +33,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('payments');
+    return queryInterface.dropTable('card_sales');
   },
 };

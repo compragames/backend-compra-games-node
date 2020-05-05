@@ -7,11 +7,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      totalPrice: {
+      total_price: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-
       client_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,7 +23,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
-        references: { model: 'saledetails', key: 'id' },
+        references: { model: 'sale_details', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      payment_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: { model: 'payments', key: 'id' },
         onUpdade: 'CASCADE',
         onDelete: 'SET NULL',
       },
