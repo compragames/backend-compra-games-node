@@ -13,6 +13,7 @@ class Address extends Model {
         city: Sequelize.STRING,
         delivery: Sequelize.BOOLEAN,
         active: Sequelize.BOOLEAN,
+        current_delivery: Sequelize.BOOLEAN,
       },
       {
         sequelize,

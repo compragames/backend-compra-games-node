@@ -15,6 +15,7 @@ import UserProviderController from './app/controllers/UserProviderController';
 import PaperUserController from './app/controllers/PaperUserController';
 import ClientController from './app/controllers/ClientController';
 import AddressController from './app/controllers/AddressController';
+import AddressCurrentController from './app/controllers/AddressCurrentController';
 import StockController from './app/controllers/StockController';
 import PaymentController from './app/controllers/PaymentController';
 import CardController from './app/controllers/CardController';
@@ -58,6 +59,9 @@ routes.get('/addresses/client/:id', AddressController.show);
 
 routes.get('/users/:id', UserController.show);
 routes.get('/stock/:id', StockController.show);
+
+routes.put('/addressesCurrent/client/:client', AddressCurrentController.update);
+routes.get('/addressesCurrent/client/:client', AddressCurrentController.show);
 
 routes.use(authMiddleware);
 
