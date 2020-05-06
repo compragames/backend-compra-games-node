@@ -6,10 +6,10 @@ class SaleDetail extends Model {
       {
         amount: Sequelize.INTEGER,
         unit_price: Sequelize.DECIMAL,
-        freight: Sequelize.DECIMAL, 
-        product_id: Sequelize.INTEGER,  
-        sale_id: Sequelize.INTEGER,  
-        address_id: Sequelize.INTEGER,            
+        freight: Sequelize.DECIMAL,
+        product_id: Sequelize.INTEGER,
+        sale_id: Sequelize.INTEGER,
+        address_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -20,7 +20,7 @@ class SaleDetail extends Model {
 
   static associate(models) {
     this.hasOne(models.Address, { foreignKey: 'address_id', as: 'addresses' });
-    this.hasMany(models.Product, { foreignKey: 'product_id', as: 'products' });
+    this.hasMany(models.Product, { foreignKey: 'id', as: 'products' });
   }
 }
 
