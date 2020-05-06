@@ -23,7 +23,6 @@ module.exports = {
       client_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: { model: 'clients', key: 'id' },
         onUpdade: 'CASCADE',
         onDelete: 'SET NULL',

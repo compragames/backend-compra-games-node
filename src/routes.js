@@ -16,7 +16,10 @@ import PaperUserController from './app/controllers/PaperUserController';
 import ClientController from './app/controllers/ClientController';
 import AddressController from './app/controllers/AddressController';
 import StockController from './app/controllers/StockController';
-import CardSaleController from './app/controllers/CardSaleController';
+import PaymentController from './app/controllers/PaymentController';
+import CardController from './app/controllers/CardController';
+import SaleController from './app/controllers/SaleController';
+import SaleDetailController from './app/controllers/SaleDetailController';
 
 // Middlewares
 import authMiddleware from './app/middleware/auth';
@@ -29,7 +32,12 @@ import multerConfig from './config/multer';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/cardsales', CardSaleController.index);
+routes.post('/cards', CardController.store);
+routes.post('/sales', SaleController.store);
+routes.get('/sales', SaleController.index);
+routes.post('/saledetails', SaleDetailController.store);
+routes.get('/saledetails', SaleDetailController.index);
+routes.post('/payments', PaymentController.store);
 routes.post('/sessions', SessionController.store);
 routes.post(
   '/users',
@@ -91,9 +99,6 @@ routes.get('/user/provider/:id', UserProviderController.show);
 routes.post('/users/provider', UserProviderController.store);
 routes.put('/user/provider/:id', UserProviderController.update);
 routes.delete('/user/provider/:id', UserProviderController.delete);
-
-
-//routes.post('/payments', PaymentController.store);
 
 
 export default routes;

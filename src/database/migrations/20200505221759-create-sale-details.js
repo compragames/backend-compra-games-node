@@ -1,11 +1,30 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('card_sales', {
+    return queryInterface.createTable('sale_details', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
+      },
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      unit_price: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      freight: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      product_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'products', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       sale_id: {
         type: Sequelize.INTEGER,
@@ -14,10 +33,10 @@ module.exports = {
         onUpdade: 'CASCADE',
         onDelete: 'SET NULL',
       },
-      card_id: {
+      address_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'cards', key: 'id' },
+        references: { model: 'addresses', key: 'id' },
         onUpdade: 'CASCADE',
         onDelete: 'SET NULL',
       },
@@ -33,6 +52,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('card_sales');
+    return queryInterface.dropTable('sale_details');
   },
 };

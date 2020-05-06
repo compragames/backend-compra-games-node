@@ -4,9 +4,10 @@ class Card extends Model {
   static init(sequelize) {
     super.init(
       {
-        cardOwner: Sequelize.STRING,
-        cardNumber: Sequelize.INTEGER,
-        dueDate: Sequelize.DATE,            
+        card_owner: Sequelize.STRING,
+        card_number: Sequelize.INTEGER,
+        due_date: Sequelize.DATE,      
+        client_id: Sequelize.INTEGER      
       },
       {
         sequelize,
@@ -16,8 +17,7 @@ class Card extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'clients' });  
-     
+    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'clients' });       
   }
 }
 

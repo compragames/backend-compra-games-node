@@ -5,8 +5,11 @@ class SaleDetail extends Model {
     super.init(
       {
         amount: Sequelize.INTEGER,
-        unitPrice: Sequelize.DECIMAL,
-        fare: Sequelize.DECIMAL,             
+        unit_price: Sequelize.DECIMAL,
+        freight: Sequelize.DECIMAL, 
+        product_id: Sequelize.INTEGER,  
+        sale_id: Sequelize.INTEGER,  
+        address_id: Sequelize.INTEGER,            
       },
       {
         sequelize,
@@ -18,7 +21,6 @@ class SaleDetail extends Model {
   static associate(models) {
     this.hasOne(models.Address, { foreignKey: 'address_id', as: 'addresses' });
     this.hasMany(models.Product, { foreignKey: 'product_id', as: 'products' });
-    this.hasOne(models.Payment, { foreignKey: 'payment_id', as: 'payments' });
   }
 }
 
