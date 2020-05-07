@@ -16,6 +16,7 @@ import Card from '../app/models/Card';
 import Sale from '../app/models/Sale';
 import Payment from '../app/models/Payment';
 import SaleDetail from '../app/models/SaleDetail';
+import SalesHistoryCard from '../app/models/SalesHistoryCard';
 
 const models = [
   User,
@@ -32,6 +33,7 @@ const models = [
   Sale,
   Payment,
   SaleDetail,
+  SalesHistoryCard,
 ];
 
 class Database {

@@ -1,14 +1,14 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Card extends Model {
+class SalesHistoryCard extends Model {
   static init(sequelize) {
     super.init(
       {
-        card_owner: Sequelize.STRING,
-        card_number: Sequelize.INTEGER,
+        sales_id: Sequelize.INTEGER,
+        name: Sequelize.STRING,
+        number_card: Sequelize.INTEGER,
         month: Sequelize.INTEGER,
         year: Sequelize.INTEGER,
-        client_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -18,8 +18,8 @@ class Card extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'clients' });
+    this.hasOne(models.Sale, { foreignKey: 'id', as: 'sales' });
   }
 }
 
-export default Card;
+export default SalesHistoryCard;

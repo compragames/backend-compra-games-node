@@ -16,8 +16,14 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      due_date: {
-        type: Sequelize.DATE,
+      month: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        allowNull: false,
+      },
+      year: {
+        type: Sequelize.INTEGER,
+        unique: true,
         allowNull: false,
       },
       client_id: {

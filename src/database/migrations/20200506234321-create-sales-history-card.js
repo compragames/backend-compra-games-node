@@ -1,46 +1,34 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('sales', {
+    return queryInterface.createTable('sales_history_cards', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      total_price: {
-        type: Sequelize.DECIMAL,
+      sales_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'sales', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
       },
-      status: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 'Aguardando Pagamento',
       },
-      installments: {
+      number_card: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 1,
       },
-      client_id: {
+      month: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'clients', key: 'id' },
-        onUpdade: 'CASCADE',
-        onDelete: 'SET NULL',
       },
-      payment_id: {
+      year: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'payments', key: 'id' },
-        onUpdade: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-      card_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: { model: 'cards', key: 'id' },
-        onUpdade: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       created_at: {
         type: Sequelize.DATE,
@@ -54,6 +42,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('sales');
+    return queryInterface.dropTable('sales_history_cards');
   },
 };
