@@ -35,9 +35,9 @@ import multerConfig from './config/multer';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/sales', SaleController.index);
+routes.get('/sales/:id', SaleController.index);
 
-routes.get('/saledetails', SaleDetailController.index);
+routes.get('/saledetails/:id', SaleDetailController.index);
 routes.post('/payments', PaymentController.store);
 routes.post('/sessions', SessionController.store);
 routes.post(
@@ -70,6 +70,7 @@ routes.post('/saledetails', SaleDetailController.store);
 routes.post('/sales/historycard', SalesHistoryCardController.store);
 routes.post('/sales', SaleController.store);
 routes.post('/cards', CardController.store);
+routes.post('/cards/:id', CardController.index);
 
 routes.put('/users', UserController.update);
 

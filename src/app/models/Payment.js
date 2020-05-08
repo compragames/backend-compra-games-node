@@ -14,7 +14,7 @@ class Payment extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.SaleDetail, { foreignKey: 'saleDetail_id', as: 'saledetails' });
+    // this.belongsTo(models.SaleDetail, { foreignKey: 'saleDetail_id', as: 'saledetails' });
   }
 }
 export default Payment;

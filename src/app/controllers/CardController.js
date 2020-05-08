@@ -36,7 +36,12 @@ class CardController {
       client_id,
     });
 
-    return res.json({ id, card_owner, card_number, due_date, client_id });
+    return res.json({ id, card_owner, card_number, year, month, client_id });
+  }
+
+  async index(req, res) {
+    const card = Card.findAll();
+    return res.json(card);
   }
 }
 

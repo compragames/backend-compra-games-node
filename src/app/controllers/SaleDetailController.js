@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import SaleDetail from '../models/SaleDetail';
-import Sale from '../models/Sale';
+import Product from '../models/Product';
+import Image from '../models/Image';
 
 class SaleDetailController {
   async store(req, res) {
@@ -26,7 +27,9 @@ class SaleDetailController {
   }
 
   async index(req, res) {
+    const { id } = req.params;
     const sale_detail = await SaleDetail.findAll({
+      where: { sale_id: id },
       attributes: [
         'id',
         'amount',
@@ -37,17 +40,16 @@ class SaleDetailController {
         'address_id',
       ],
       include: [
-        //             {
-        //                 model:SaleDetail,
-        //                 as: 'saledetails',
-        //                 attributes: ['id', 'amount', 'unit_price', 'freight', 'product_id',
-        //                  'sale_id', 'address_id'
-        //             ],
-        // },
         {
-          model: Sale,
-          as: 'sales',
-          attributes: ['id', 'total_price', 'status', 'payment_id'],
+          model: Product,
+          as: 'products',
+          include: [
+            {
+              model: Image,
+              as: 'images',
+              attributes: ['id', 'name', 'path', 'main', 'url'],
+            },
+          ],
         },
       ],
     });

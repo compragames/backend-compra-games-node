@@ -19,8 +19,11 @@ class Sale extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Client, { foreignKey: 'client_id', as: 'clients' });
-    this.hasOne(models.Payment, { foreignKey: 'payment_id', as: 'payments' });
+    this.hasOne(models.Client, { foreignKey: 'id', as: 'clients' });
+    this.belongsTo(models.Payment, {
+      foreignKey: 'payment_id',
+      as: 'payments',
+    });
     this.hasMany(models.SaleDetail, {
       foreignKey: 'sale_id',
       as: 'saledetails',

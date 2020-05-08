@@ -18,7 +18,7 @@ class Card extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'clients' });
+    this.belongsTo(models.Client, { foreignKey: 'id', as: 'clients' });
   }
 }
 
