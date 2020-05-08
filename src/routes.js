@@ -22,6 +22,7 @@ import CardController from './app/controllers/CardController';
 import SaleController from './app/controllers/SaleController';
 import SaleDetailController from './app/controllers/SaleDetailController';
 import SalesHistoryCardController from './app/controllers/SalesHistoryCardController';
+import StockSaleController from './app/controllers/StockSaleController';
 
 // Middlewares
 import authMiddleware from './app/middleware/auth';
@@ -64,6 +65,7 @@ routes.get('/addressesCurrent/client/:client', AddressCurrentController.show);
 
 routes.use(authMiddleware);
 
+routes.post('/stock/sale', StockSaleController.update);
 routes.post('/saledetails', SaleDetailController.store);
 routes.post('/sales/historycard', SalesHistoryCardController.store);
 routes.post('/sales', SaleController.store);

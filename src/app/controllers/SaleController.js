@@ -14,32 +14,36 @@ class SaleController {
       return res.status(400).json({ error: 'validations fails' });
     }
 
-    const {
-      total_price,
-      status,
-      installments,
-      client_id,
-      payment_id,
-      card_id,
-    } = req.body;
+    try {
+      const {
+        total_price,
+        status,
+        installments,
+        client_id,
+        payment_id,
+        card_id,
+      } = req.body;
 
-    const { id } = await Sale.create({
-      total_price,
-      status,
-      installments,
-      client_id,
-      payment_id,
-      card_id,
-    });
+      const { id } = await Sale.create({
+        total_price,
+        status,
+        installments,
+        client_id,
+        payment_id,
+        card_id,
+      });
 
-    return res.json({
-      id,
-      total_price,
-      status,
-      client_id,
-      payment_id,
-      card_id,
-    });
+      return res.json({
+        id,
+        total_price,
+        status,
+        client_id,
+        payment_id,
+        card_id,
+      });
+    } catch (error) {
+      return res.status(400).json({ message: error.message, msg: 'Ola' });
+    }
   }
 
   async index(req, res) {
