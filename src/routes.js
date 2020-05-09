@@ -26,7 +26,6 @@ import StockSaleController from './app/controllers/StockSaleController';
 
 // Middlewares
 import authMiddleware from './app/middleware/auth';
-import updateStockMiddleware from './app/middleware/updateStock';
 import cpfValidationMiddleware from './app/middleware/cpfValidation';
 import userUnavailableMiddleware from './app/middleware/userUnavailable';
 
@@ -83,12 +82,7 @@ routes.put('/products/:id', ProductController.update);
 
 routes.get(`/products/:id/detail`, ProductDetailController.show);
 
-// A rota de compra tem um middleware para atualizar o estoque
-routes.post(
-  '/acquisitions',
-  updateStockMiddleware,
-  AcquisitionController.store
-);
+routes.post('/acquisitions', AcquisitionController.store);
 
 routes.put('/availableProduct/:id', AvailableProductController.store);
 routes.delete('/availableProduct/:id', AvailableProductController.delete);
