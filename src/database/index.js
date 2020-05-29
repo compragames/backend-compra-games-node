@@ -17,6 +17,7 @@ import Sale from '../app/models/Sale';
 import Payment from '../app/models/Payment';
 import SaleDetail from '../app/models/SaleDetail';
 import SalesHistoryCard from '../app/models/SalesHistoryCard';
+import PaymentStatus from '../app/models/PaymentStatus';
 
 const models = [
   User,
@@ -34,6 +35,7 @@ const models = [
   Payment,
   SaleDetail,
   SalesHistoryCard,
+  PaymentStatus,
 ];
 
 class Database {
@@ -46,6 +48,10 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  getConnection() {
+    return this.connection;
   }
 }
 

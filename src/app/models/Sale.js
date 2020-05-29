@@ -4,17 +4,22 @@ class Sale extends Model {
   static init(sequelize) {
     super.init(
       {
+        freight: Sequelize.DECIMAL,
         total_price: Sequelize.DECIMAL,
-        status: Sequelize.STRING,
         installments: Sequelize.INTEGER,
+        status: Sequelize.STRING,
         client_id: Sequelize.INTEGER,
         payment_id: Sequelize.INTEGER,
         card_id: Sequelize.INTEGER,
+        address_id: Sequelize.INTEGER,
+        products: Sequelize.VIRTUAL,
+        card: Sequelize.VIRTUAL,
       },
       {
         sequelize,
       }
     );
+
     return this;
   }
 
@@ -29,6 +34,14 @@ class Sale extends Model {
       as: 'saledetails',
     });
     this.hasOne(models.Card, { foreignKey: 'id', as: 'cards' });
+    this.belongsTo(models.Address, {
+      foreignKey: 'address_id',
+      as: 'addresses',
+    });
+    this.belongsTo(models.PaymentStatus, {
+      foreignKey: 'status_id',
+      as: 'payment_status',
+    });
   }
 }
 

@@ -13,7 +13,7 @@ class ProductDetailController {
         {
           model: _Image2.default,
           as: 'images',
-          attributes: ['id', 'path', 'url', 'name'],
+          attributes: ['id', 'name', 'path', 'main', 'url'],
         },
         {
           model: _Faq2.default,

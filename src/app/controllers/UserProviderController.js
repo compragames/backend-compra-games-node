@@ -115,7 +115,7 @@ class UserProvidController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    const { id, provider } = await user.update(req.body);
 
     return res.json({
       id,

@@ -4,6 +4,7 @@ class Address extends _sequelize.Model {
   static init(sequelize) {
     super.init(
       {
+        name: _sequelize2.default.STRING,
         street: _sequelize2.default.STRING,
         number: _sequelize2.default.STRING,
         neighborhood: _sequelize2.default.STRING,
@@ -13,6 +14,7 @@ class Address extends _sequelize.Model {
         city: _sequelize2.default.STRING,
         delivery: _sequelize2.default.BOOLEAN,
         active: _sequelize2.default.BOOLEAN,
+        current_delivery: _sequelize2.default.BOOLEAN,
       },
       {
         sequelize,

@@ -18,8 +18,18 @@ class AddressController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'validations fails' });
     }
+    if (req.body.add) {
+      const address = await _Address2.default.create({ ...req.body, delivery: true });
+      return res.json(address);
+    }
     const address = [];
-    address.push(await _Address2.default.create({ ...req.body, delivery: true }));
+    address.push(
+      await _Address2.default.create({
+        ...req.body,
+        delivery: true,
+        current_delivery: true,
+      })
+    );
     address.push(await _Address2.default.create({ ...req.body, delivery: false }));
     return res.json(address);
   }
@@ -51,7 +61,9 @@ class AddressController {
   async show(req, res) {
     const { id } = req.params;
 
-    const addressess = await _Address2.default.findAll({ where: { client_id: id } });
+    const addressess = await _Address2.default.findAll({
+      where: { client_id: id, delivery: true },
+    });
 
     return res.json(addressess);
   }

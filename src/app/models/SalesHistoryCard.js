@@ -6,7 +6,7 @@ class SalesHistoryCard extends Model {
       {
         sales_id: Sequelize.INTEGER,
         name: Sequelize.STRING,
-        number_card: Sequelize.INTEGER,
+        number_card: Sequelize.STRING,
         month: Sequelize.INTEGER,
         year: Sequelize.INTEGER,
       },

@@ -15,10 +15,7 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
-      freight: {
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-      },
+
       product_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -30,13 +27,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'sales', key: 'id' },
-        onUpdade: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-      address_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'addresses', key: 'id' },
         onUpdade: 'CASCADE',
         onDelete: 'SET NULL',
       },

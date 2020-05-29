@@ -12,12 +12,5 @@ class Stock extends _sequelize.Model {
     );
     return this;
   }
-
-  static associate(models) {
-    this.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'stock_product',
-    });
-  }
 }
 exports. default = Stock;

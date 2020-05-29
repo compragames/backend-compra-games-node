@@ -7,6 +7,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      freight: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
       total_price: {
         type: Sequelize.DECIMAL,
         allowNull: false,
@@ -20,6 +24,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 1,
+      },
+      address_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'addresses', key: 'id' },
+        onUpdade: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       client_id: {
         type: Sequelize.INTEGER,

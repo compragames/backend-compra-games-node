@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
       },
       number_card: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       month: {

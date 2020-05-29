@@ -8,8 +8,8 @@ class CardController {
         .min(3)
         .required()
         .matches(/^(\D\D[A-z]+ \D\D[A-z ]+)$/),
-      card_number: Yup.number()
-        .min(16)
+      card_number: Yup.string()
+        .min(5)
         .required(),
       client_id: Yup.number().required(),
     });
@@ -40,7 +40,8 @@ class CardController {
   }
 
   async index(req, res) {
-    const card = Card.findAll();
+    const { client_id } = req.params;
+    const card = await Card.findAll({ where: { client_id } });
     return res.json(card);
   }
 }

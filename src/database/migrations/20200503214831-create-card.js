@@ -12,18 +12,15 @@ module.exports = {
         allowNull: false,
       },
       card_number: {
-        type: Sequelize.INTEGER,
-        unique: true,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       month: {
         type: Sequelize.INTEGER,
-        unique: true,
         allowNull: false,
       },
       year: {
         type: Sequelize.INTEGER,
-        unique: true,
         allowNull: false,
       },
       client_id: {
