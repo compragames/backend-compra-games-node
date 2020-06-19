@@ -8,7 +8,7 @@ class AddressCurrentController {
       where: { client_id: client, current_delivery: true },
     });
 
-    // se encontrar algum endereço como corrent ele altera pra false
+    // se encontrar algum endereço como current ele altera pra false
     if (oldAddressCurrent) {
       oldAddressCurrent.map(async a => {
         await a.update({ current_delivery: false });

@@ -97,6 +97,7 @@ class SaleController {
 
     const sale = await Sale.findAll({
       where: { client_id },
+      order: ['created_at'],
       attributes: ['id', 'freight', 'created_at', 'total_price', 'status'],
       include: [
         {

@@ -9,4 +9,5 @@ export default (routes, auth) => {
   // Routes Private
   routes.post('/files', auth, upload.single('file'), FileController.store);
   routes.delete('/files/:id', auth, FileController.delete);
+  routes.put('/files/:id', auth, FileController.update);
 };

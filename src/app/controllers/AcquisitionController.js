@@ -1,39 +1,35 @@
-import * as Yup from 'yup';
 import Acquisition from '../models/Acquisition';
 import Product from '../models/Product';
+import CreateStock from '../../services/CreateStockService';
 
 class AcquisitionController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      product_id: Yup.number().required(),
-      amount: Yup.number().required(),
-      price: Yup.number().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({
-        error: 'Validation fails',
+    try {
+      const { product_id, amount, price } = req.body;
+      const product = await Product.findOne({
+        where: {
+          id: product_id,
+        },
       });
-    }
-    const { product_id, amount, price } = req.body;
-    const product = await Product.findOne({
-      where: {
-        id: product_id,
-      },
-    });
+      // Verifica se existe produto
+      if (!product) {
+        throw new Error('Product does not exist');
+      }
 
-    if (!product) {
-      return res.status(400).json({
-        error: 'Product does not exist ',
+      // Cria uma compra
+      const acquisition = await Acquisition.create({
+        product_id,
+        amount,
+        price,
       });
-    }
 
-    const acquisition = await Acquisition.create({
-      product_id,
-      amount,
-      price,
-    });
-    return res.json(acquisition);
+      // adiciona no stock a compra
+      await CreateStock.run({ product_id, amount });
+
+      return res.json(acquisition);
+    } catch (error) {
+      return res.status(400).json({ error });
+    }
   }
 }
 

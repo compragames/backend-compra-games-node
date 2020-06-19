@@ -22,7 +22,9 @@ class CardController {
 
     const { card_owner, card_number, year, month, client_id } = req.body;
 
-    const cardExists = await Card.findOne({ where: { card_number } });
+    const cardExists = await Card.findOne({
+      where: { card_number, client_id },
+    });
 
     if (cardExists) {
       return res.status(400).json({ error: 'Card already exists!' });

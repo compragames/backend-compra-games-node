@@ -6,9 +6,6 @@ import Paper from '../models/Paper';
 class UserProvidController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string()
-        .required()
-        .min(5),
       email: Yup.string()
         .email()
         .required(),
@@ -24,12 +21,16 @@ class UserProvidController {
     if (userExist) {
       return res.status(400).json({ error: 'User already exists' });
     }
-    const { name, email, password, provider } = req.body;
+    const { email, password, provider, paper } = req.body;
 
-    const { id } = await User.create({ name, email, password, provider });
+    const { id } = await User.create({ email, password, provider });
+    await PaperUser.create({
+      user_id: id,
+      paper_id: paper,
+    });
     return res.json({
       id,
-      name,
+
       email,
       provider,
     });
@@ -38,7 +39,7 @@ class UserProvidController {
   async index(req, res) {
     const users = await User.findAll({
       where: { provider: true, active: true },
-      attributes: ['id', 'name', 'email', 'provider'],
+      attributes: ['id', 'email', 'provider'],
       include: [
         {
           model: PaperUser,
@@ -62,7 +63,7 @@ class UserProvidController {
     const { id } = req.params;
     const users = await User.findByPk(id, {
       where: { provider: true },
-      attributes: ['id', 'name', 'email', 'provider'],
+      attributes: ['id', 'email', 'provider'],
       include: [
         {
           model: PaperUser,
@@ -83,45 +84,17 @@ class UserProvidController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      email: Yup.string().email(),
-      oldPassword: Yup.string().min(6),
-      password: Yup.string()
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-    });
+    const { id, paperId } = req.body;
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+    if (paperId) {
+      const result = await PaperUser.findOne({ where: { user_id: id } });
+      await result.update({
+        paper_id: paperId,
+      });
     }
-    const { email, oldPassword } = req.body;
-    const user = await User.findByPk(req.params.id);
-
-    if (email && email !== user.email) {
-      const userExist = await User.findOne({ where: { email } });
-
-      if (userExist) {
-        return res.status(400).json({ error: 'User already exists' });
-      }
-    }
-
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Password does not match' });
-    }
-
-    const { id, provider } = await user.update(req.body);
 
     return res.json({
-      id,
-      name,
-      email,
-      provider,
+      sucess: 'ok',
     });
   }
 

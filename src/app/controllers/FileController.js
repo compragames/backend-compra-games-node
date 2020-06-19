@@ -9,6 +9,7 @@ class FileController {
       name,
       path,
     });
+
     return res.json(file);
   }
 
@@ -17,12 +18,21 @@ class FileController {
 
     const file = await Image.findByPk(id);
 
-    fs.unlink(resolve('tmp', 'uploads', file.path), err => {
-      if (err) throw err;
-    });
+    // fs.unlink(resolve('tmp', 'uploads', file.path), err => {
+    //   if (err) throw err;
+    // });
 
     await file.destroy({
       where: { id },
+    });
+    return res.json(file);
+  }
+
+  async update(req, res) {
+    const { id } = req.params;
+    const file = await Image.findByPk(id);
+    await file.update({
+      main: true,
     });
     return res.json(file);
   }

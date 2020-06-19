@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "compragames",
+  "private_key_id": "c9b2794544a89953a50288874dc2112664b67c9d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDuwmUlZOLNPEFy\nnhsz1jo+2BdcCNJ5l6YsWmc6CdYlLewh/3wcOZHSl2mgskrzQwxcF8s+S/7CfwUN\nucUXkssjrWKi7gdoCGe+jR4SfiNGuSceFyFTJ9KFzaJE8EKPg7fZfVQjQHnoIIxG\nVlHBXrwMjJoMMWOceKC4nIXnTyxoF++JkEnjKiMeFz5JItnU+A1Kk/JXC+B72wdk\npca5lpcHnh9CAJvlo1CerKSd+/ufMqUh/3syyyyKMikUtcX6mmom1DLkB6OrDhHQ\n3OS6XLvjvxOx1LgtC+TjRpQTnyl3SUS4GvmFFNXOl27X8m6wVB/P2uZ73xYDuwyj\nPSpGFjjdAgMBAAECggEAdCKunF/USkxS8XOie7ZqooLt6eCIsIhpVg2rRHngZjlO\nMMNbFUeTfMIVqQrQlj841drlC6pfgy/Rv3lrOyo2EWaXIfVyONJN1ExEIm6krhQF\nyQcrOI2YQ2lg0vOjDLffR7VEpdkI8zZRxSzbm5l/EwOZMvEbKNMsKmBIadkDGqYJ\nWwr6woBO6EN+ETjHwdvekUaEvcv5sJgThM/Z80FnEII8f019BKJWxx4t+fRWyag0\n4a/YJEQtIP4U/dDNxBspXSBPxOI7ebSJyAK1mpb/zkdZWisBnHIi3UlFq4U3STrg\nJVN7rNn8SRk/gcc4bwkmzvVTQ+Bb1NfRZgbofjUu6QKBgQD7i1poaGMI9SKfAF+q\n+LUyT1SATrj/w6gDB3fFsWKiLC7VWaKqSOkbUiCPTJ0rSe24h97QiBBbgW6kUKNh\nHVbdRwL3sH72uuX+3qN6Okitwt7D/D09WnGPcZkCj44z2J/ucy0QccX6w0+E9LN1\niRd8hLHKVsgaP/tf7/9jEKTlkwKBgQDy/RFDQ7oxlrb+GqC1MQDTAYDELuWmRKP9\nqMj06blTjg6sHBmuVKpw16VWu/M+6io547r8AAdF2rC+P/hII7eQmSJp4bfL20LB\nfsnLJXjaMTOC8tSP+s5gsQnZPS5QGu0KRBCkklKvZaEMcXZd4yP8MQ9cq1UkjO8+\n/LPz2ZttzwKBgEMTkfQtgdstoyHLM7efwpG73cipNWPehLrqDuJEvwyHw6VY1aua\n7a4/ZDdSMscMW7vNX3k0D0iXZy2h4y9OZ49yFDSAeBrLE/G25Nj/GcpcIJMafCoU\nKBwcKrUoGr9wkJVBWU79R9HqqxXFOuWovP6TU+Wk5o85aIrYsL11/sLJAoGBAKDd\nLx+D5/FKYO1KvZgWz//hX9kBXyG7EYItypRxYzLQuh/xHoNOI+Q+r4QDO98r8TaP\n8EtCzY3OYPIisYE4vB7rcl/8gcxg5QnqoTdvIFn69qo7jsOe/CABNI7wNQftO35v\nX0FEaZ8avgrZ1s4DQOCFrjDgcKaY8w6VB6FpL7/7AoGBAMfb/dLbkBKcYNLY6yT2\nCvmbbuV/xeESxoyeYC9D/Pt6kJUPQePWiBdN+ucltwiGEYJIzBdBY/7Xta/kDAoc\nuPBnlxC5BQoveRke4isqtli7+xU3CpfOB8jFMtIGADmG1j8XdMxXDa6+8T8Rw56w\nP4KF49ZnYbhsnxjqkB0bD5x4\n-----END PRIVATE KEY-----\n",
+  "client_email": "images@compragames.iam.gserviceaccount.com",
+  "client_id": "111834356382961003010",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/images%40compragames.iam.gserviceaccount.com"
+}

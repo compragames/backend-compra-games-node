@@ -3,7 +3,32 @@ import Address from '../models/Address';
 
 class AddressController {
   async store(req, res) {
+    const schema = Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required(),
+        street: Yup.string().required(),
+        number: Yup.string().required(),
+        neighborhood: Yup.string().required(),
+        cep: Yup.string().required(),
+        complement: Yup.string(),
+        state: Yup.string()
+          .length(2)
+          .required(),
+        city: Yup.string().required(),
+        delivery: Yup.boolean().required(),
+      })
+    );
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'validations fails' });
+    }
+    const address = await Address.bulkCreate(req.body);
+    return res.json(address);
+  }
+
+  async update(req, res) {
     const schema = Yup.object().shape({
+      name: Yup.string().required(),
       street: Yup.string().required(),
       number: Yup.string().required(),
       neighborhood: Yup.string().required(),
@@ -13,36 +38,6 @@ class AddressController {
         .length(2)
         .required(),
       city: Yup.string().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'validations fails' });
-    }
-    if (req.body.add) {
-      const address = await Address.create({ ...req.body, delivery: true });
-      return res.json(address);
-    }
-    const address = [];
-    address.push(
-      await Address.create({
-        ...req.body,
-        delivery: true,
-        current_delivery: true,
-      })
-    );
-    address.push(await Address.create({ ...req.body, delivery: false }));
-    return res.json(address);
-  }
-
-  async update(req, res) {
-    const schema = Yup.object().shape({
-      street: Yup.string(),
-      number: Yup.string(),
-      neighborhood: Yup.string(),
-      cep: Yup.string(),
-      complement: Yup.string(),
-      state: Yup.string().length(2),
-      city: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -58,13 +53,32 @@ class AddressController {
     return res.json(newAddress);
   }
 
-  async show(req, res) {
+  async index(req, res) {
     const { id } = req.params;
 
     const addressess = await Address.findAll({
-      where: { client_id: id, delivery: true },
+      where: { client_id: id, delivery: true, active: true },
+      order: ['name'],
     });
 
+    return res.json(addressess);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const addressess = await Address.findByPk(id);
+
+    return res.json(addressess);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const addressess = await Address.findByPk(id);
+    await addressess.update({
+      active: false,
+    });
     return res.json(addressess);
   }
 }

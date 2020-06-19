@@ -6,9 +6,13 @@ export default (routes, auth) => {
   routes.post('/addresses', AddressController.store);
 
   // Routes Private
+  // AddressController
   routes.put('/addresses/:id', auth, AddressController.update);
-  routes.get('/addresses/client/:id', auth, AddressController.show);
+  routes.get('/addresses/client/:id', auth, AddressController.index);
+  routes.get('/addresses/:id', auth, AddressController.show);
+  routes.delete('/addresses/:id', auth, AddressController.delete);
 
+  // AddressCurrentController
   routes.put(
     '/addressesCurrent/client/:client',
     auth,
